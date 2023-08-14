@@ -1,4 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { IonService } from './ion.service';
 
 @Controller('ion')
-export class IonController {}
+export class IonController {
+  constructor(private readonly ionService: IonService) {}
+
+  @Get('create-did')
+  async createDID(): Promise<{}> {
+    return this.ionService.createDID();
+  }
+
+  @Get('resolve-did/:did')
+  async resolveDID(@Param('did') did: string): Promise<any> {
+    return this.ionService.resolveDID(did);
+  }
+}
