@@ -1,7 +1,9 @@
-import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Res, UseGuards } from '@nestjs/common';
 import { IonService } from './ion.service';
+import { BasicAuthGuard } from 'src/basic_auth/basic-auth.guard';
 
 @Controller('ion')
+@UseGuards(BasicAuthGuard)
 export class IonController {
   constructor(private readonly ionService: IonService) {}
 
